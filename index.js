@@ -24,7 +24,7 @@ const dbURL = process.env.DB_Link
 const MongoDBStore = require("connect-mongo")(session);
 /* mongodb://0.0.0.0:27017/camp-with-ease */
 
-mongoose.connect(dbURL,{
+mongoose.connect('mongodb://0.0.0.0:27017/camp-with-ease',{
     useNewUrlParser : true,
     //useCreateIndex : true,
     useUnifiedTopology: true,
@@ -53,7 +53,7 @@ app.use(express.json())
 app.use(mongoSanitize())
 
 const store = new MongoDBStore({
-    url : dbURL,
+    url : 'mongodb://0.0.0.0:27017/camp-with-ease',
     secret : 'hello',
     touchAfter : 24*60*60
 })
@@ -64,7 +64,7 @@ store.on("error",function(e){
 const sessionConfig = {
     store,
     name: 'session',
-    secret: 'this is the secret',
+    secret: 'hello',
     resave: false,
     saveUninitialized: true, 
     cookie:{
@@ -123,7 +123,8 @@ app.use((err,req,res,next)=>{
     res.status(statusCode).render('error',{err})
 });
 
-app.listen(3000,()=>
+const port = process.env.PORT || 3000;
+app.listen(port, ()=>
 {
-    console.log("APP PORT 3000")
+    console.log(`serving on port ${port}`)
 })
