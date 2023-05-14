@@ -24,7 +24,7 @@ const dbURL = process.env.DB_Link
 const MongoDBStore = require("connect-mongo")(session);
 /* mongodb://0.0.0.0:27017/camp-with-ease */
 
-mongoose.connect('mongodb://0.0.0.0:27017/camp-with-ease',{
+mongoose.connect(dbURL,{
     useNewUrlParser : true,
     //useCreateIndex : true,
     useUnifiedTopology: true,
@@ -53,8 +53,8 @@ app.use(express.json())
 app.use(mongoSanitize())
 
 const store = new MongoDBStore({
-    url : 'mongodb://0.0.0.0:27017/camp-with-ease',
-    secret : 'htubdsf',
+    url : dbURL,
+    secret : 'hello',
     touchAfter : 24*60*60
 })
 
