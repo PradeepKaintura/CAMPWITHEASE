@@ -2,7 +2,7 @@ if(process.env.NODE_ENV !=="production"){
     require('dotenv').config();
 }
 
-console.log(process.env.SECRET)
+/* console.log(process.env.SECRET) */
 const express = require('express');
 const path =require('path');
 const mongoose = require('mongoose');
@@ -24,7 +24,7 @@ const dbURL = process.env.DB_Link
 const MongoDBStore = require("connect-mongo")(session);
 /* mongodb://0.0.0.0:27017/camp-with-ease */
 
-mongoose.connect(dbURL,{
+mongoose.connect('mongodb://0.0.0.0:27017/camp-with-ease',{
     useNewUrlParser : true,
     //useCreateIndex : true,
     useUnifiedTopology: true,
@@ -40,6 +40,7 @@ db.once("open",()=>{
 
 
 const app = express();
+app.use(express.static('uploads'))
 
 app.engine('ejs',ejsMate);
 app.set('view engine', 'ejs')
@@ -53,7 +54,7 @@ app.use(express.json())
 app.use(mongoSanitize())
 
 const store = new MongoDBStore({
-    url : dbURL,
+    url : 'mongodb://0.0.0.0:27017/camp-with-ease',
     secret : 'hello',
     touchAfter : 24*60*60
 })
@@ -119,7 +120,8 @@ app.all('*',(req,res,next)=>{
 
 app.use((err,req,res,next)=>{
     const {statusCode = 500} = err;
-    if(!err.message) err.message = "OH NOT"
+    if(!err.message) 
+     err.message = "OH NOT"
     res.status(statusCode).render('error',{err})
 });
 

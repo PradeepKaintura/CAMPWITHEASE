@@ -1,14 +1,39 @@
-function fetchData(fromPopstate){
-  fetch('getApi',{
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body :  JSON.stringify( filterParams)
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        updatePage(data,fromPopstate);
+const fetchData = (fromPopstate, sortBy="") => {
+  fetch('getApi', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sortBy: sortBy })
+  })
+    .then(res => res.json())
+    .then(data => {
+      updatePage(data, fromPopstate);
     });
+};
+
+const dropdownMenu = document.querySelector('.dropdown-menu');
+const dropdownButton = document.querySelector('.dropdown-toggle');
+dropdownMenu.addEventListener('click', (event) => {
+  const selectedValue = event.target.getAttribute('data-value');
+ /*  console.log(selectedValue); */
+  dropdownButton.textContent = selectedValue; // Set the selected value as the button text
+  dropdownButton.classList.add('selected');
+  fetchData(false, selectedValue);
+});
+dropdownButton.addEventListener('click', () => {
+  resetSelection();
+});
+
+
+function resetSelection() {
+  dropdownButton.textContent = 'Select an option'; // Reset the button text to default
+  /* selectedValueInput.value = ''; */ // Reset the input box value
+  dropdownButton.classList.remove('selected'); // Remove the "selected" class from the button
+  fetchData(false,"")
 }
+dropdownButton.addEventListener('click', () => {
+  dropdownButton.textContent = 'Select an option'; // Reset the button text to default
+  dropdownButton.classList.remove('selected'); // Remove the "selected" class from the button
+});
 
 window.addEventListener('popstate',(event)=>{
   const state = event.state;
@@ -25,30 +50,48 @@ function showData(campgrounds){
   const myDiv = document.querySelector("#my-div");
   myDiv.innerHTML = "";
   campgrounds.forEach(item =>{
-    let html = `
-        <div class="card mb-3">
-          <div class="row">
-            <div class="col-md-4">
-              ${item.images.length ? `<img class="img-fluid" alt="" src="${item.images[0].url}">` : `<img class="img-fluid" alt="" src="">`}
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">${item.title}</h5>
-                <p class="card-text">${item.description}</p>
-                <p class="card-text">
-                  <small class="text-muted">${item.location}</small>
-                </p>
-                <a class="btn btn-primary" href="/campgrounds/${item._id}" >View: ${item.title}</a>
-              </div>
-            </div>
-          </div>
-        </div>
+    let html = ` 
+    <div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="card indexCards shadow border-0 mt-4">
+    <a href="/campgrounds/${item._id}" >
+       ${item.images.length ? `<img class="img-fluid" alt="" src="${item.images[0].url}">` : `<img class="img-fluid" alt="" src="">`}
+    </a>
+       <div class="card-body">
+        <h6 class="card-title text-capitalize" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        ${item.title}
+        </h6><br>
+        <small class="float-end">Rs. ${item.price}/Person</small>
+        </h6>
+        <h6 class= "card-subtitle">`
+        if(item.reviews.length ===0){
+          html+= ` <span class="text-muted">No Reviews</span>`
+        }else{
+          var stars= [`<i class="far fa-star"></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>`]
+          for(var i = 0; i < Math.round(item.rateAvg); i++) { 
+          stars[i] = html+='<i class="fas fa-star" style="color: rgb(223, 223, 11) ;"></i>'
+         } 
+         for(var i = 0; i < stars.length; i++) { 
+           stars[i] 
+         } 
+         if (item.reviews.length === 1) {
+          html+= `<span class="text-muted">${item.reviews.length} Review</span>`
+        } else { 
+          html+=`<span class="text-muted">${item.reviews.length} Reviews</span>`
+         } 
+        }        
+       html+= `<h6 class="card-subtitle">
+              <span class="text-muted">${item.reviews.length} Review</span>
+        </h6>
+      </div>
+    </div>
+  </div>
+  
       `;
       myDiv.innerHTML += html;
   })
 }
 
-const limit = 2;
+const limit = 6;
 let currentPage = sessionStorage.getItem('currentPage')||1;
 
 const updatePage = (data, fromPopstate=false) => {
@@ -157,9 +200,5 @@ const updatePage = (data, fromPopstate=false) => {
   }
 };
 
-const filterParams= {
-  minPrice: null,
-  maxPrice: null
-}
 
 fetchData(false)

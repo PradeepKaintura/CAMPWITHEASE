@@ -1,20 +1,3 @@
-window.onload = function() {
-  const searchQuery = JSON.parse(sessionStorage.getItem('searchQuery'));
-  if (searchQuery && searchQuery.search) {
-    const searchBox = document.querySelector("#search-input");
-    const currentPage = searchQuery.page || 1;
-   /*  const url = new URLSearchParams(window.location.search)
-    url.set('search',searchQuery.search)
-    url.set('page',searchQuery.page)
-    const path = window.location.pathname+"?"+url.toString() 
-    console.log(path)
-    history.pushState({page: searchQuery.page, source: "searchDisplay"}, "", path);*/
-    searchBox.value = searchQuery.search;
-    console.log(searchQuery.page)
-    sendData(searchBox, 2, currentPage,false);
-  }
-};
-
 window.addEventListener('popstate',function(event){
     const state = event.state;
     
@@ -25,12 +8,29 @@ window.addEventListener('popstate',function(event){
       const searchValue = url.get("search")
       searchBox.value = searchValue
       page = state.page
-      sendData(searchBox, 2 , page,true)
+      sendData(searchBox, 6, page,true)
     }
-
 })
 
-function sendData(e, limit =2  ,page = 1 ,fromPopstate = false) {
+window.addEventListener("load", function() {
+  const searchBox = document.querySelector("#search-input");
+  const searchQuery = sessionStorage.getItem("searchQuery");
+  if (searchQuery) {
+    const { search, page } = JSON.parse(searchQuery);
+    searchBox.value = search;
+    console.log("from load:: " +page)
+   /*  const url = new URLSearchParams(window.location.search)
+     url.set("search",search)
+     url.set("page",page) */
+
+   /*   var newpath = window.location.pathname + "?" + url.toString(); */
+     
+    sendData(searchBox, 6 , page,false)
+  }
+});
+
+function sendData(e, limit = 6  ,page = 1 ,fromPopstate = false) {
+
     const searchParam = new URLSearchParams(window.location.search);
     
     if(!fromPopstate){
@@ -157,33 +157,48 @@ function sendData(e, limit =2  ,page = 1 ,fromPopstate = false) {
   });
 }
     
-
 function displayResults(payload){
   const myDiv = document.querySelector("#my-div");
         myDiv.innerHTML = "";
         if (payload.length < 1) {
           myDiv.innerHTML = "<p>Nothing found</p>";
-          /* return; */
         }else{
         payload.forEach(item => {
           let html = `
-            <div class="card" mb-3>
-              <div class="row">
-                <div class="col-md-4">
-                  ${item.images.length ? `<img class="img-fluid" alt="" src="${item.images[0].url}">` : `<img class="img-fluid" alt="" src="">`}
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">${item.title}</h5>
-                    <p class="card-text">${item.description}</p>
-                    <p class="card-text">
-                      <small class="text-muted">${item.location}</small>
-                    </p>
-                    <a class="btn btn-primary" href="/campgrounds/${item._id}" >View: ${item.title}</a>
-                  </div>
-                </div>
-              </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card indexCards shadow border-0 mt-4">
+          <a href="/campgrounds/${item._id}" >
+             ${item.images.length ? `<img class="img-fluid" alt="" src="${item.images[0].url}">` : `<img class="img-fluid" alt="" src="">`}
+          </a>
+             <div class="card-body">
+              <h6 class="card-title text-capitalize" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              ${item.title}
+              </h6><br>
+              <small class="float-end">Rs. ${item.price}/Person</small>
+              </h6>
+              <h6 class= "card-subtitle">`
+              if(item.reviews.length ===0){
+                html+= ` <span class="text-muted">No Reviews</span>`
+              }else{
+                var stars= [`<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>`]
+                for(var i = 0; i < Math.round(item.rateAvg); i++) { 
+                stars[i] = html+='<i class="fas fa-star" style="color: rgb(223, 223, 11) ;"></i>'
+               } 
+               for(var i = 0; i < stars.length; i++) { 
+                 stars[i] 
+               } 
+               if (item.reviews.length === 1) {
+                html+= `<span class="text-muted">${item.reviews.length} Review</span>`
+              } else { 
+                html+=`<span class="text-muted">${item.reviews.length} Reviews</span>`
+               } 
+              }        
+             html+= `<h6 class="card-subtitle">
+                    <span class="text-muted">${item.reviews.length} Review</span>
+              </h6>
             </div>
+          </div>
+        </div>
           `;
           myDiv.innerHTML += html;
         });      

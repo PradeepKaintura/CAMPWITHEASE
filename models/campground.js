@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Review = require('./review')
+const User = require('./user')
 const Schema = mongoose.Schema;
 
 const opts = { toJSON: {virtuals: true} };
@@ -31,9 +32,19 @@ const CampgroundSchema = new Schema({
     price: Number,
     description: String,
     location: String,
+    actLoc: String,
     author:{
         type: Schema.Types.ObjectId,
         ref : 'User'
+    },
+    contact: String,
+    rateAvg: {
+        type: Number,
+        default : 0
+    },
+    rateCount:{
+        type: Number,
+        default: 0
     },
     reviews: [
         {

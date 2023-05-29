@@ -1,8 +1,14 @@
+var bounds = [
+    [42.16764488351333, 0.6088291152430189], // Southwest coordinates
+    [121.95228152580137, 44.22520450516124] // Northeast coordinates
+];
+
 const map = new maplibregl.Map({
     container: 'map',
-    style: `https://api.maptiler.com/maps/streets/style.json?key=${key}`,
-    center: [-103.59179687498357, 40.66995747013945],
-    zoom: 3
+    style: `https://api.maptiler.com/maps/hybrid/style.json?key=${key}`,
+    center: [77.72361935361799, 24.438696429974982],
+    zoom: 0,
+    maxBounds: bounds
 });
 map.on('load', function () {
     // Add a new source from our GeoJSON data and

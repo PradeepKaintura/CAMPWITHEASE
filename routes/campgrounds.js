@@ -7,6 +7,7 @@ const Campground = require("../models/campground");
 const multer = require('multer');
 const { reviewSchema } = require('../schemas');
 const { storage } = require('../cloudinary');
+
 const upload = multer({storage});
 
 router.route('/')
