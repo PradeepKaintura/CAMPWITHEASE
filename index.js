@@ -26,7 +26,7 @@ const MongoDBStore = require("connect-mongo")(session);
 console.log(dbURL)
 
 
-mongoose.connect('mongodb://0.0.0.0:27017/camp-with-ease'/* dbURL */,{
+mongoose.connect(/*'mongodb://0.0.0.0:27017/camp-with-ease'*/dbURL ,{
     useNewUrlParser : true,
     //useCreateIndex : true,
     useUnifiedTopology: true,
@@ -56,7 +56,7 @@ app.use(express.json())
 app.use(mongoSanitize())
 
 const store = new MongoDBStore({
-    url : 'mongodb://0.0.0.0:27017/camp-with-ease'/* dbURL */,
+    url : /*'mongodb://0.0.0.0:27017/camp-with-ease'*/ dbURL ,
     secret : 'hello',
     touchAfter : 24*60*60
 })
