@@ -18,7 +18,7 @@ window.addEventListener("load", function() {
   if (searchQuery) {
     const { search, page } = JSON.parse(searchQuery);
     searchBox.value = search;
-    console.log("from load:: " +page)
+    /*console.log("from load:: " +page)*/
    /*  const url = new URLSearchParams(window.location.search)
      url.set("search",search)
      url.set("page",page) */
