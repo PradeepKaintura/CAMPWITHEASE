@@ -239,7 +239,7 @@
         </ul>
         <ul class="list-group list-group-flush">
           <li class="list-group-item text-muted"><%= campground.location%></li>
-          <li class="list-group-item text-muted">Submitted by <%= campground.author.username%> <%= campground.author.lastname  %></li>
+          <li class="list-group-item text-muted">Submitted by <%= campground.author?.username%></li>
           <li class="list-group-item">Rs. <%= campground.price%> /Person</li>
           <div id="lat" hidden><%= campground.geometry.coordinates[0]%></div>
           <div id="long" hidden><%= campground.geometry.coordinates[1]%></div>
