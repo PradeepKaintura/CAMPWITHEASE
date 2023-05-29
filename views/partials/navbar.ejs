@@ -1,0 +1,27 @@
+
+<div >
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color:rgb(220, 53, 69);">
+    <div class="container-fluid">
+      <a class="navbar-brand mx-5" href="#">CAMP WITH EASE</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav me-auto">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+          <a class="nav-link" href="/campgrounds/?page=1">Campgrounds</a>
+          <a class="nav-link" href="/campgrounds/new">New Campground</a>
+        </div>
+        <div class="navbar-nav  me-5">
+          <% if(!currentUser){ %>
+          <a class="nav-link" href="/login" data-link>Login</a>
+          <a class="nav-link" href="/register" data-link>Register</a>
+          <%}else { %>
+          <a class="nav-link" href="/logout" data-link>Logout</a>
+          <%}%>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+

@@ -1,0 +1,66 @@
+<% layout('layouts/boilerplate')%>
+<!-- <h1>Register</h1> -->
+
+<div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+            <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+                <div><p class="lead"><strong>the best campgrounds for your outdoor adventure at Camp With Ease.<br> Browse, read reviews, and plan your perfect getaway.<br> Join our community and embark on exciting camping journeys. <br>Start exploring nature with Camp With Ease today!</strong></p></div>
+            </p>
+        </div>
+
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+            <div class="card bg-glass">
+                <div class="card-body px-4 py-5 px-md-5">
+                    <form id="formsubmit" action="/register" method="post" class="validated-form" novalidate>
+                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <label class="form-label" for="username">First Name</label>
+                                    <input class="form-control" type="text" id="username" name="username" required>
+                                    <div class="valid-feedback">
+                                        Looks Good!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                                    <label class="form-label" for="username">Last Name</label>
+                                    <input class="form-control" type="text" id="lastname" name="lastname" required>
+                                    <div class="valid-feedback">
+                                        Looks Good!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" type="email" id="email" name="email" required>
+                            <div class="valid-feedback">
+                                Looks Good!
+                            </div>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control" type="password" id="password" name="password" required>
+                            <div class="invalid-feedback">
+                                password length should be greater than 8, must contain special character/digit/Uppercase
+                            </div>
+                        </div>
+
+                        <button class="btn btn-block mb-4 w-100" style="background-color:rgb(220, 53, 69);">Register</button>
+                        <!-- Register buttons -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="javascripts/passVerification.js"></script>

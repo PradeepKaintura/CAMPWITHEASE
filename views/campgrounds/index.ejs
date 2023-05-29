@@ -1,0 +1,73 @@
+<%layout('layouts/boilerplate')%>
+<div id="map" style="width:100%; height:500px;"> </div>
+<div class="container mt-2 me-auto ms-auto">
+
+  <nav class="navbar navbar-expand-sm navbar-light shadow-sm" style="background-color: transparent">
+    <div class="navbar-nav me-auto  ">
+      <div class="dropdown ">
+        Sort By: &nbsp;
+        <button class="btn btn-secondary dropdown-toggle rounded-pill bg-white text-dark" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          Select an option
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" data-value="Highest Price">Highest Price</a></li>
+          <li><a class="dropdown-item" data-value="Lowest Price">Lowest Price</a></li>
+          <li><a class="dropdown-item" data-value="Rating">Rating</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="navbar-nav ">
+      
+      <input class="form-control rounded-pill mt-2" placeholder="search" type = "text" id = "search-input"  value="" oninput="sendData(this) " >
+    </div>
+  </nav>
+  
+
+<h1>ALL Campgrounds</h1>
+
+<div>
+  <a href="/campgrounds/new">Add New</a>
+</div>
+
+<div class="row" id = "my-div">
+  
+</div>
+
+<div class="d-flex justify-content-center align-items-center mt-3">
+  <div id="pagination-div"></div>
+</div>
+
+<script>
+    const key = '<%- process.env.MAPLIBRE_API_KEY%>'
+    const campgrounds = {features: <%- JSON.stringify(campgrounds) %>}
+</script>
+<script src="/javascripts/clusterMap.js"></script>
+<script src="/javascripts/displayData.js"></script>
+<script src="/javascripts/searchDisplay.js"></script>
+</script>
+
+<style>
+  .page-link{
+    cursor: pointer;
+  }
+  .pagination .page-link {
+      color: #0b0b0b; /* Text color */
+      background-color: rgb(8, 244, 212); /* Background color */
+      border-color: #0c69e3; /* Border color */
+    }
+
+    .pagination .page-link:hover {
+      color: #0b0b0b; /* Hover text color */
+      background-color:rgb(8, 244, 212); /* Hover background color */
+      border-color: #0c69e3; /* Hover border color */
+    }
+
+    .pagination .page-item.active .page-link {
+      color: #0b0b0b; /* Active text color */
+      background-color: #5f68af; /* Active background color */
+      border-color: #0c69e3; /* Active border color */
+    }
+</style>
+</div>
+
+

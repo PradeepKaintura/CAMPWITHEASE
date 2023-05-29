@@ -1,0 +1,76 @@
+<%layout('layouts/boilerplate')%>
+<div class="container mt-2 me-auto ms-auto">
+<div class="row">
+    <h1 class="text-center">New Campground</h1>
+    <div class="col-md-6 offset-sm-0 offset-lg-3 offset-md-3">
+        <form action = "/campgrounds" method = "post" class="validated-Form" novalidate enctype="multipart/form-data">
+            <div class="mb-3"> 
+                <label class ="form-label" for = "title">Title</label>
+                <input class ="form-control" type = "text" id = "title" name = "campground[title]" required >
+            </div>
+            <div class="mb-3">
+                <i class="fas fa-map-marker-alt"></i>
+                <label class ="form-label" for = "location">Location</label>
+                <input class ="form-control" type = "text" id = "location" name = "campground[location]" required>
+            </div>
+            <div class="mb-3">
+                <label class ="form-label" for = "price">Price</label>
+                <div class="input-group ">
+                    <span class="input-group-text" id ="price-label">Rs</span>
+                    <input type="text" class="form-control" placeholder="0.0" aria-label="Price" aria-describedby="price-label" name = "campground[price]" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class ="form-label" for = "description">Description</label>
+                <textarea class ="form-control" type = "text" id = "description" name = "campground[description]" required></textarea>
+            </div>
+            <div class="mb-3">
+                <i class="fas fa-phone"></i> <label class ="form-label" for = "contact">Contact</label>
+                <input class="form-control"type="text" name="campground[contact]" id="contact" >
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Images</label>
+                <input  class="form-control" type="file", placeholder="" , name = "image", id="image" multiple>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Add Campground</button>
+            </div>
+        </form>
+        <a href="/campgrounds/?page=1">All campgrounds</a>
+    </div>
+</div>
+</div>
+
+<script>
+const phoneInput = document.getElementById('contact');
+let isBackspacePressed = false;
+
+phoneInput.addEventListener('keydown', function(event) {
+  if (event.key === "Backspace") {
+    isBackspacePressed = true;
+  }
+});
+
+phoneInput.addEventListener('input', function(event) {
+  const inputText = event.target.value;
+  
+  // Check if the input already starts with "+91-"
+  if (inputText.startsWith("+91-")) {
+    if (isBackspacePressed) {
+      isBackspacePressed = false;
+      return; // Do not modify the input during backspace
+    }
+    return; // Do not modify the input
+  }
+  
+  // Remove any existing "+91-" from the input
+  const sanitizedText = inputText.replace(/^\+91-/g, '');
+  
+  // Append "+91-" to the beginning of the input
+  const formattedText = "+91-" + sanitizedText;
+  
+  // Update the input value
+  event.target.value = formattedText;
+});
+
+</script>

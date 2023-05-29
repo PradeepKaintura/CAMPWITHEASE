@@ -1,0 +1,332 @@
+<%layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+<div class="container mt-2 me-auto ms-auto">
+<div class="row ">
+  <div class="col-md-4 order-2">
+    <div class="card shadow-lg bg-dark">
+      <div id="map" class="map-container"></div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><i class="fas fa-map-marker-alt"></i>
+          <%= campground.location %>
+        </li>
+      </ul>
+    </div>
+    <div class="card shadow-lg mt-3 ">
+      <div class="card-header">
+        <i class="fas fa-phone"></i> Contact For Enquiry
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <%= campground.contact  %>
+        </li>
+      </ul>
+    </div>
+    <div class="card shadow-lg mt-3 bg-dark">
+      <section>
+          <div class="row d-flex justify-content-center align-items-center">
+            <div >
+              <div id="wrapper-bg" class="card text-black shadow-4-strong">
+                <!-- Main current data -->
+                <div class="card-header  ">
+                  <div class="text-center mb-2">
+                    <p class="mb-1" id="wrapper-description"></p>
+                    <p class="display-1 mb-1" id="wrapper-temp"></p>
+                    <span class="">Pressure: <span id="wrapper-pressure"></span></span>
+                    <span class="mx-2">|</span>
+                    <span class="">Humidity: <span id="wrapper-humidity"></span></span>
+                  </div>
+                </div>
+      
+                <!-- Hourly forecast -->
+                <div class="card-body  border-top border-bottom mb-2">
+                  <div class="row text-center">
+                    <div class="col-2">
+                      <strong class="d-block mb-2">Now</strong>
+                      <img id="wrapper-icon-hour-now" src="" class="" alt="" />
+                      <strong class="d-block" id="wrapper-hour-now"></strong>
+                    </div>
+      
+                    <div class="col-2">
+                      <strong class="d-block mb-2" id="wrapper-time1"></strong>
+                      <img id="wrapper-icon-hour1" src="" class="" alt="" />
+                      <strong class="d-block" id="wrapper-hour1"></strong>
+                    </div>
+      
+                    <div class="col-2">
+                      <strong class="d-block mb-2" id="wrapper-time2"></strong>
+                      <img id="wrapper-icon-hour2" src="" class="" alt="" />
+                      <strong class="d-block" id="wrapper-hour2"></strong>
+                    </div>
+      
+                    <div class="col-2">
+                      <strong class="d-block mb-2" id="wrapper-time3"></strong>
+                      <img id="wrapper-icon-hour3" src="" class="" alt="" />
+                      <strong class="d-block" id="wrapper-hour3"></strong>
+                    </div>
+      
+                    <div class="col-2">
+                      <strong class="d-block mb-2" id="wrapper-time4"></strong>
+                      <img id="wrapper-icon-hour4" src="" class="" alt="" />
+                      <strong class="d-block" id="wrapper-hour4"></strong>
+                    </div>
+      
+                    <div class="col-2">
+                      <strong class="d-block mb-2" id="wrapper-time5"></strong>
+                      <img id="wrapper-icon-hour5" src="" class="" alt="" />
+                      <strong class="d-block" id="wrapper-hour5"></strong>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Daily forecast -->
+                <a class="btn btn-dark d-flex justify-content-center align-items-center" data-bs-toggle="collapse" href="#colset" role="button" aria-expanded="false" aria-controls="colset" id="collapseButton">
+                  <span id="collapseButtonIcon" class="fa fa-angle-double-down"></span>
+                </a>
+                <div class="collapse" id="colset">
+                <div class="card-body px-5">
+                  <div class="row align-items-center">
+                    <div class="col-lg-6">
+                      <strong>Today</strong>
+                    </div>
+      
+                    <div class="col-lg-2 text-center">
+                      <img id="wrapper-icon-today" src="" class="w-100" alt="" />
+                    </div>
+      
+                    <div class="col-lg-4 text-end">
+                      <span id="wrapper-forecast-temp-today"></span>
+                    </div>
+                  </div>
+      
+                  <div class="row align-items-center">
+                    <div class="col-lg-6">
+                      <strong>Tomorrow</strong>
+                    </div>
+      
+                    <div class="col-lg-2 text-center">
+                      <img id="wrapper-icon-tomorrow" src="" class="w-100" alt="" />
+                    </div>
+      
+                    <div class="col-lg-4 text-end">
+                      <span id="wrapper-forecast-temp-tomorrow">28</span>
+                    </div>
+                  </div>
+      
+                  <div class="row align-items-center">
+                    <div class="col-lg-6" id="date1">
+                      
+                    </div>
+      
+                    <div class="col-lg-2 text-center">
+                      <img id="wrapper-icon-dAT1" src="" class="w-100" alt="" />
+                    </div>
+      
+                    <div class="col-lg-4 text-end">
+                      <span id="wrapper-forecast-temp-dAT1">28</span>
+                    </div>
+                  </div>
+
+                  <div class="row align-items-center">
+                    <div class="col-lg-6" id="date2">
+                      
+                    </div>
+      
+                    <div class="col-lg-2 text-center">
+                      <img id="wrapper-icon-dAT2" src="" class="w-100" alt="" />
+                    </div>
+      
+                    <div class="col-lg-4 text-end">
+                      <span id="wrapper-forecast-temp-dAT2">28</span>
+                    </div>
+                  </div>
+                  
+                  <div class="row align-items-center">
+                    <div class="col-lg-6" id="date3">
+                      
+                    </div>
+      
+                    <div class="col-lg-2 text-center">
+                      <img id="wrapper-icon-dAT3" src="" class="w-100" alt="" />
+                    </div>
+      
+                    <div class="col-lg-4 text-end">
+                      <span id="wrapper-forecast-temp-dAT3">28</span>
+                    </div>
+                  </div>
+
+                  <div class="row align-items-center">
+                    <div class="col-lg-6" id="date4">
+                    </div>
+      
+                    <div class="col-lg-2 text-center">
+                      <img id="wrapper-icon-dAT4" src="" class="w-100" alt="" />
+                    </div>
+      
+                    <div class="col-lg-4 text-end">
+                      <span id="wrapper-forecast-temp-dAT4">28</span>
+                    </div>
+                  </div>
+
+                  <div class="row align-items-center">
+                    <div class="col-lg-6" id="date5">
+                    </div>
+      
+                    <div class="col-lg-2 text-center">
+                      <img id="wrapper-icon-dAT5" src="" class="w-100" alt="" />
+                    </div>
+      
+                    <div class="col-lg-4 text-end">
+                      <span id="wrapper-forecast-temp-dAT5">28</span>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+      
+            </div>
+          </div>
+      </section>
+    </div>
+  </div>
+  <div class="col-md-8 mr-4 order-1">
+    <div id="campCarousel" class="carousel slide" data-bs-ride="carousel" >
+      <div id='map' ></div>
+      <div class="carousel-inner" style ="height:100%;">
+        <% campground.images.forEach((img, i)=> { %>
+          <div class="carousel-item  <%= i=== 0?'active':'' %> ">
+            <img src="<%= img.url  %>" class="d-block w-100" alt="">
+          </div>
+        <% }) %>
+      </div>
+      <% if(campground.images.length >1){%>
+      <button class="carousel-control-prev" type="button" data-bs-target="#campCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#campCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      <% } %>
+    </div>
+    <div class="card mb-mt-4" >
+      <div class="card shadow-lg mt-3">
+        <div class="card-header"> 
+          <h5 class="card-title"><%= campground.title%></h5>
+          <div>
+            <% if(campground.reviews.length===0){ %>
+              <small class="text-muted">No Reviews</small>
+            <% }else{ %>
+              <% var stars = ['<small><i class="far fa-star text-danger"></i></small>', '<small><i class="far fa-star text-danger"></i></small>', '<small><i class="far fa-star text-danger"></i></small>', '<small><i class="far fa-star text-danger"></i></small>', '<small><i class="far fa-star text-danger"></i></small>'] %>
+                  <% for(var i = 0; i < Math.round(campground.rateAvg); i++) { %>
+                      <% stars[i] = '<small><i class="fas fa-star " style="color: rgb(223, 223, 11) ;"></i></small>' %>
+                  <% } %>
+                  <% for(var i = 0; i < stars.length; i++) { %>
+                    <%- stars[i] %>
+                  <% } %>
+                  <% if (campground.reviews.length === 1) { %>
+                    <small class="text-muted"><%= campground.rateAvg %> Review</small>
+                  <% } else { %>
+                    <small class="text-muted"><%= campground.reviews.length %> Reviews</small>
+                  <% } %>
+            <% } %>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <p class="card-text"><%= campground.description%></p>
+          </li>
+        </ul>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-muted"><%= campground.location%></li>
+          <li class="list-group-item text-muted">Submitted by <%= campground.author.username%> <%= campground.author.lastname  %></li>
+          <li class="list-group-item">Rs. <%= campground.price%> /Person</li>
+          <div id="lat" hidden><%= campground.geometry.coordinates[0]%></div>
+          <div id="long" hidden><%= campground.geometry.coordinates[1]%></div>
+        </ul>
+        <% if (currentUser && campground.author.equals(currentUser._id)) { %>
+          <div class="card-body">
+              <a class="card-link btn btn-info "href="/campgrounds/<%= campground._id%>/edit"><i class="fas fa-pencil-alt"></i></a>
+              <form class="d-inline" action = "/campgrounds/<%=campground._id%>?_method=DELETE" method = "post">
+                  <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+              </form>
+          </div>
+        <% } %>
+      </div>
+    </div>
+    <div>
+    <% if (currentUser) { %>
+      <h2>Leave a Review</h2>
+      <form action="/campgrounds/<%=campground._id%>/reviews" method="post" class="mb-3 validated-form" novalidate >
+        <div class="mb-4">
+            <fieldset class="starability-checkmark" required>
+              <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="3" checked aria-label="No rating." />
+              <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+              <label for="first-rate1" title="Terrible">1 star</label>
+              <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+              <label for="first-rate2" title="Not good">2 stars</label>
+              <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+              <label for="first-rate3" title="Average">3 stars</label>
+              <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+              <label for="first-rate4" title="Very good">4 stars</label>
+              <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+              <label for="first-rate5" title="Amazing">5 stars</label>
+            </fieldset>
+            <div id="rating-feedback" class="invalid-feedback">
+              Please select a rating before submitting the review.
+            </div>
+          
+          <label class="form-label" for="body">Review</label>
+          <textarea class= "form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+          <div class="invalid-feedback">
+            You cannot leave this part blank.
+          </div>
+        <button class="btn btn-success">Submit</button>
+      </form>
+    <% } %>
+    <div class="row-md-3" id ="reviewView">
+      <% for(let review of campground.reviews){%>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title"><%= review.author.username%></h5>
+          <p class="starability-result" data-rating="<%= review.rating %>">
+            Rated: <%= review.rating  %> stars
+          </p>
+          <!-- <h6 class="card-subtitle mb-2 text-muted">By: <%= review.author.username %></h6> -->
+          <p class="card-text">Review: <%= review.body%></p>
+          <% if (currentUser && review.author.equals(currentUser._id)) { %>
+            <form action="/campgrounds/<%= campground._id%>/reviews/<%= review._id%>?_method=Delete" method="post">
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          <% } %>
+        </div>
+      </div>
+    <% } %>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" href="/stylesheets/reviewShow.css">
+<script>
+  const key = '<%- process.env.MAPLIBRE_API_KEY %>' ;
+  const weather_key = '<%- process.env.weather_api %>'
+  const campground = <%- JSON.stringify(campground) %> ;
+</script>
+<!-- <script src="/javascripts/selectStars.js"></script> -->
+<script src="/javascripts/showPageMap.js"></script>
+<script src="/javascripts/weatherApi.js"></script>
+
+<script>
+  $(document).ready(function() {
+  $('#collapseButton').click(function() {
+    if ($('#collapseButton').attr('aria-expanded') === 'true') {
+      $('#collapseButtonIcon').removeClass('fa-angle-double-down').addClass('fa-angle-double-up');
+      $('#collapseButton').removeClass('justify-content-center').addClass('justify-content-center');
+    } else {
+      $('#collapseButtonIcon').removeClass('fa-angle-double-up').addClass('fa-angle-double-down');
+      $('#collapseButton').removeClass('justify-content-center').addClass('justify-content-center');
+    }
+  });
+});
+</script>

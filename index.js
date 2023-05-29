@@ -4,7 +4,7 @@ if(process.env.NODE_ENV !=="production"){
 
 /* console.log(process.env.SECRET) */
 const express = require('express');
-const path =require('path');
+const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
@@ -23,8 +23,10 @@ const ExpressMongoSanitize = require('express-mongo-sanitize');
 const dbURL = process.env.DB_Link
 const MongoDBStore = require("connect-mongo")(session);
 /* mongodb://0.0.0.0:27017/camp-with-ease */
+console.log(dbURL)
 
-mongoose.connect(dbURL,{
+
+mongoose.connect('mongodb://0.0.0.0:27017/camp-with-ease'/* dbURL */,{
     useNewUrlParser : true,
     //useCreateIndex : true,
     useUnifiedTopology: true,
@@ -54,7 +56,7 @@ app.use(express.json())
 app.use(mongoSanitize())
 
 const store = new MongoDBStore({
-    url : dbURL,
+    url : 'mongodb://0.0.0.0:27017/camp-with-ease'/* dbURL */,
     secret : 'hello',
     touchAfter : 24*60*60
 })
@@ -62,6 +64,7 @@ const store = new MongoDBStore({
 store.on("error",function(e){
     console.log("Session store error",e)
 })
+
 const sessionConfig = {
     store,
     name: 'session',
@@ -121,7 +124,7 @@ app.all('*',(req,res,next)=>{
 app.use((err,req,res,next)=>{
     const {statusCode = 500} = err;
     if(!err.message) 
-     err.message = "OH NOT"
+     err.message = "OH NO"
     res.status(statusCode).render('error',{err})
 });
 

@@ -1,0 +1,25 @@
+<% if(success && success.length) {%>
+  <div class="d-flex align-items-center justify-content-center">
+    <div id="success" class="alert alert-success alert-dismissible fade show" style="width:max-content;"role="alert">
+        <%= success%>
+    </div>
+  </div>
+<% } %>
+
+<% if(error && error.length) {%>
+  <div class="d-flex align-items-center justify-content-center">
+    <div id="failure" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= error%>
+    </div>
+  </div>
+<% } %>
+
+<script>
+  // After 3 seconds, hide and remove the success and failure messages
+  setTimeout(function() {
+    $("#success, #failure").alert('close'); // Hide the messages
+    setTimeout(function() {
+      $("#success, #failure").remove(); // Remove the messages from the DOM
+    },100); // Delay removal to allow fade out transition
+  },1500);
+</script>

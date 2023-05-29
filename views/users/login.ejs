@@ -1,0 +1,37 @@
+<% layout('layouts/boilerplate')%>
+<!-- <h1>Login</h1> -->
+
+<div class="container px-4 py-5 px-md-5 text-center text-start my-5">
+    <div class="row gx-5 align-items-center mb-5">
+      <div class="col-6 mb-0" >
+        <p class="mb-4 opacity" style="color: hsl(218, 81%, 85%)">
+          <div class=><p class="lead"><strong>the best campgrounds for your outdoor adventure at Camp With Ease.<br> Browse, read reviews, and plan your perfect getaway.<br> Join our community and embark on exciting camping journeys. <br>Start exploring nature with Camp With Ease today!</strong></p></div>
+        </p>
+      </div>
+
+      <div class="col-6 mb-5 mb-0 ">
+        <div class="card bg-glass">
+          <div class="card-body px-4 py-5 px-md-5">
+            <form action="/login" method="post" class="validated-form" novalidate>
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="form-outline mb-4">
+                  <label class ="form-label" for = "username">Username</label>
+                  <input class ="form-control" type = "text" id = "username" name = "username" required >
+                </div>
+
+              <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <label class ="form-label" for = "password">Password</label>
+                  <input class ="form-control" type = "password" id = "password" name = "password" required >
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-block w-100 mb-4" style="background-color:rgb(220, 53, 69);">
+                    Login
+                </button>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+
+

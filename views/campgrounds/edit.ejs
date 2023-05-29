@@ -1,0 +1,67 @@
+<%layout('layouts/boilerplate')%>
+<div class="container mt-2 me-auto ms-auto">
+<div class="row">
+    <h1 class="text-center">Edit Campground</h1>
+    <div class="col-md-6 offset-sm-0 offset-lg-3 offset-md-3">
+        <form  class="validated-form" novalidate action = "/campgrounds/<%= campground._id%>?_method=PUT" method = "post"  enctype="multipart/form-data" >
+            <div class="mb-3">
+                <label class ="form-label" for = "title">Title</label>
+                <input class ="form-control" type = "text" id = "title" name = "campground[title]" value="<%= campground.title%>" required>
+                <div class="invalid-feedback">
+                    Please enter your name.
+                </div>
+            </div>
+            <div class="mb-3">
+                <i class="fas fa-map-marker-alt"></i>
+                <label class ="form-label" for = "location">Location</label>
+                <input class ="form-control" type = "text" id = "location" name = "campground[location]" value="<%= campground.location%>" required>
+                <div class="invalid-feedback">
+                    Enter Location
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class ="form-label" for = "price">Price</label>
+                <div class="input-group ">
+                    <span class="input-group-text" id ="price-label">Rs.</span>
+                    <input type="text" class="form-control" placeholder="0.0" aria-label="Price" aria-describedby="price-label" name = "campground[price]" value="<%= campground.price%>" required>
+                    <div class="invalid-feedback">
+                        Enter the price
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class ="form-label" for = "description">Description</label>
+                <textarea class ="form-control" type = "text" id = "description" name = "campground[description]" required><%= campground.description %></textarea>
+                <div class="invalid-feedback">
+                    Write the Description
+                </div>
+            </div>
+            <div class="mb-3">
+                <i class="fas fa-phone"></i> <label class ="form-label" for = "contact">Contact</label>
+                <input class="form-control" type="text" name="campground[contact]"  id="contact" value="<%= campground.contact  %>">
+                <div class="invalid-feedback">
+                    Enter a valid contact. it should start wiht +91-
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class ="form-label" for = "image">Add Images</label>
+                <input type="file" name="image" id="image" multiple>
+            </div>
+
+            <div class="mb-3">
+                <% campground.images.forEach(function(img,i) { %>
+                    <img src="<%= img.thumbnail %>" alt="" class="img-thumbnail" >
+                    <div class="form-check-inline">
+                        <input type="checkbox" id = "image-<%= i %>" name="deleteImages[]" value="<%=img.filename%>">
+                    </div>
+                    <label for="image-<%= i %>">Delete</label>
+                <% }) %>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">Update Campground</button>
+            </div>
+        </form>
+        <a href="/campgrounds/<%= campground._id%>">BACK to campgrounds</a>
+    </div>
+</div>
+</div>
