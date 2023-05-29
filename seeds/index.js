@@ -27,7 +27,7 @@ const seedDB = async()=>{
         const price = Math.floor(Math.random()*4960)+567;
         const contact  = "+91-" + (Math.floor(Math.random()*(99999-62000+1))+62000)+(Math.floor(Math.random()*(99999-59421+1))+59421)
         const camp = new Campground({
-            author: '6460741b9fd198edbe8e7677',
+            author: '647440f2c597f16ccd478331',
             location :  `${city[random1000].city}, ${city[random1000].state}` ,
             actLoc : `${city[random1000].activity_location}`,
             title : `${city[random1000].name}`,
