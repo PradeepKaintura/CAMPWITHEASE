@@ -2,7 +2,7 @@
   "name": "camp-with-ease",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node seeds/index.js"
   },
   "dependencies": {
     "@maptiler/sdk": "^1.0.10",
